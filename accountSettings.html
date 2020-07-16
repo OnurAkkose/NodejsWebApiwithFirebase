@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hesap</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link rel="stylesheet"
+        href="design-files/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="design-files/css/style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-storage.js"></script>
+</head>
+
+<body>
+    <div class="wrapper" style="background-image: url('design-files/images/signinCity.jpg')">
+        <div class="inner">
+            <div class="image-holder">
+                <img src="design-files/images/accountHuman.png">
+            </div>
+            <form action="">
+                <h3>HESAP AYARLARI</h3>
+                <div class="form-group">
+                    <input id="firstName" type="text" placeholder="İsim" class="form-control">
+                    <input id="secondName" type="text" placeholder="Soyisim" class="form-control">
+
+                </div>
+                
+                <div class="form-wrapper">
+                    <input id="phone" type="number" placeholder="Telefon" class="form-control">
+                    <i class="zmdi zmdi-tablet-mac"></i>
+                </div>
+                <div class="form-wrapper">
+                    <select name="" id="gender" class="form-control">
+                        <option value="" disabled selected>Cinsiyet</option>
+                        <option value="Male">Erkek</option>
+                        <option value="Female">Kadın</option>                        
+
+                    </select>
+                    <i class="zmdi zmdi-caret-down" style="font-size: 17px;"></i>
+                </div>
+                <div class="form-wrapper">
+                    <input id="adress" type="text" placeholder="Şehir" class="form-control">
+                    <i class="zmdi zmdi-pin"></i>
+                </div>
+                <div class="form-wrapper">
+                    <input id="bio" type="text" placeholder="Hakkımda" class="form-control">
+                    <i class="zmdi zmdi-box-mail"></i>
+                </div>
+                <div class="form-group container-login100-form-btn">
+                    <button id="btn-update" type="button">
+                        Güncelle
+                        <i class="zmdi zmdi-arrow-right"></i>
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+    <script>
+        
+    </script>
+    <script>
+        
+    </script>
+</body>
+
+</html>

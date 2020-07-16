@@ -1,0 +1,80 @@
+
+<hr>
+<br><br><br>
+<div class="text-center bg-light text-dark">
+   <h3>Tüm Sorular</h3>
+
+</div>
+<hr>
+<br>
+<div class="row container-fluid bg-3">
+    <div class="col-sm-12" id="blogs">
+
+    </div>
+</div>
+<br>
+<script>
+   
+var counter = 0;   
+
+var dbBlogs = firebase.database().ref().child("Questions").orderByChild("counter");
+var user = firebase.auth().currentUser;
+dbBlogs.on("value",function(blogs){
+    if(blogs.exists()){
+        var blogsHtml = "";
+
+            blogs.forEach(function(singleBlog)
+            {
+                counter = counter + 1;
+
+                blogsHtml += "<div class= 'jumbotron bg-light text-dark '>";
+                    blogsHtml += "<div> <img  width='1000px' height ='550px' src='";
+                        blogsHtml += singleBlog.val().image;
+                    blogsHtml += "/> </div> <br>"; 
+                       
+                
+                    blogsHtml += "<div class = 'row'>";
+                        blogsHtml+= "<div id ='qMail' class='col-sm-5'> <p style ='color:grey;'>"
+                                + "Soran: " +singleBlog.val().email
+                                +"</p> </div>"+
+                                "<div class='col-sm-3'> <p style ='color:grey;'>"
+                                + "Saat: " +singleBlog.val().time
+                                +"</p> </div>"+
+                                "<div class='col-sm-4'> <p style ='color:grey; margin-left:50%px;'>"
+                                + "Tarih: " +singleBlog.val().date
+                                +"</p> </div>"
+                                ;                                                         
+
+                    blogsHtml += "</div> <br> <hr style='border-width:2px;'";  
+                
+                    blogsHtml += "<hr style='border-width:2px;' <div style='text-align: justify; color: black;'>";
+                        blogsHtml +=singleBlog.val().desc;
+                    blogs.Html +="</div> <br> <hr style='border-width:2px;'";
+
+                    blogsHtml += "<div class = 'form-group' style='text-align: justify; color: black;'>";
+                        blogsHtml +="<button id='btn-asnwer' onclick='answerTo()'  class='form-control btn btn-light bg-dark text-white' >Soruyu Cevapla</button>";
+                    blogs.Html +="</div> <br>";
+                    blogsHtml += "</div>";
+
+                   
+
+                blogsHtml += "<hr style='border-width:2px;' </div> <hr style='border-width:5px; border-color:green;'>";
+              
+            });
+            $("#blogs").html(blogsHtml);
+        }
+
+});
+
+
+function answerTo(){
+    switchView("messageBox.html");  
+}
+   
+
+
+
+
+//*****Retrieve and display data form firebase Ends Here********* 
+</script>
+<script src="js/app.js"></script>

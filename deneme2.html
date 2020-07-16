@@ -1,0 +1,15 @@
+<script>
+var user = firebase.auth().currentUser;
+var userName;
+  firebase.database().ref('Users/' + user.uid).once('value').then(function (snapshot) {
+      var fName = (snapshot.val() && snapshot.val().firstName);
+      var sName = (snapshot.val() && snapshot.val().secondName);
+
+      userName = fName + " " + sName;
+
+  });
+//var user = firebase.auth().currentUser;
+//var dbBlogs = firebase.database().ref().child("Users").orderByChild("uid").equalTo(user.uid);
+
+document.getElementById("username").innerHTML = dbBlogs.val().userName;
+</script>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="design-files/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-storage.js"></script>
+
+
+
+    <style>
+        .center {
+            margin: auto;
+            width: 50%;
+
+            padding: 10px;
+        }
+
+        .label {
+            color: white;
+            padding: 8px;
+            font-family: Arial;
+        }
+
+        .success {
+            background-color: #4CAF50;
+        }
+
+        /* Green */
+        .info {
+            background-color: #2196F3;
+        }
+
+        /* Blue */
+        .warning {
+            background-color: #ff9800;
+        }
+
+        /* Orange */
+        .danger {
+            background-color: #f44336;
+        }
+
+        /* Red */
+        .other {
+            background-color: #e7e7e7;
+            color: black;
+        }
+
+        /* Gray */
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-primary text-white">
+        <div class="container-fluid">
+            <ul class="navbar navbar-nav">
+                <li class="active">
+                    <a class="navbar-brand" style="color: whitesmoke; text-decoration-style:wavy; " href="index.html"
+                        onclick="switchView('index.html')">
+                        Soru Paylaşım Platformu
+                    </a>
+                </li>
+
+                <li>
+                    <a class="nav-link" href="#" style="color: whitesmoke; text-decoration-style:wavy;"
+                        onclick="testUserforHome()">
+
+                        <span style="color: white">Soru Havuzu</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="#" style="color: whitesmoke; text-decoration-style:wavy;"
+                        onclick="testUserforSchedule()">
+                        <span style="color: white">Kişiye Özel Ders Programı</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="#" style="color: whitesmoke; text-decoration-style:wavy;"
+                        onclick="testUserforMyQuestions()">
+                        <span style="color: white">Sor</span>
+                    </a>
+                </li>
+
+
+
+
+
+            </ul>
+
+
+
+            <div class="dropdown navbar-right">
+
+                <button id="option-id" class="btn btn-light dropdown-toggle bg-dark text-white" type="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                    style=" width:250px;word-wrap: break-word;">
+                    <div id="username"></div>
+                </button>
+
+                <div class="dropdown-menu" aria-labelledby="option-id">
+                    <a class="dropdown-item" href="#" onclick="testUserforProfileCon()">
+                        Profil Ayarları
+                    </a>
+                    <a class="dropdown-item" href="#" onclick="testUserforMessageBox()">
+                        Mesajlarım
+                    </a>
+                    <a class="dropdown-item" id="btn-logout" href="#">
+                        Çıkış
+                    </a>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </nav>
+
+    <div class="row h-100 bg-light">
+        <div class="col-lg-0 bg-secondary">
+            <ul class="nav flex-column">
+
+            </ul>
+        </div>
+        <div class="col-lg-12" style="margin-left:10px;">
+            <div class="container" id="container">
+                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+                <link rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                <style>
+                    body,
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6 {
+                        font-family: "Lato", sans-serif
+                    }
+
+                    .w3-bar,
+                    h1,
+                    button {
+                        font-family: "Montserrat", sans-serif
+                    }
+
+                    .fa-anchor,
+                    .fa-coffee {
+                        font-size: 200px
+                    }
+                </style>
+
+                <body>
+
+
+
+                    <!-- Header -->
+                    <header class="w3-container w3-red w3-center" style="padding:128px 16px">
+                        <h1 class="w3-margin w3-jumbo">Soru Paylaşım Platformu</h1>
+                        <p class="w3-xlarge">Sınavlara hazırlanan herkes için</p>
+                        <button id="main-ask" onclick="testUser()"
+                            class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Sor</button>
+                    </header>
+
+                    <!-- First Grid -->
+                    <div class="w3-row-padding w3-padding-64 w3-container">
+                        <div class="w3-content">
+                            <div class="w3-twothird">
+                                <h1>Sınavlarınız için Yardımcı</h1>
+                                <h5 class="w3-padding-32">
+                                    Çözmekte zorlandığınız sorular ve öğrenmek istediğiniz Matematik konuları için
+                                    hemen üyelik alabilirsiniz.
+
+
+                                </h5>
+
+                                <p class="w3-text-grey">
+                                    Bu platform üzerinde işlem yapabilmek için öncelikle üye olmanız gerekmektedir.
+                                    Çözemediğiniz soruların fotoğraflarını çekerek profiliniz üzerinde sorabilirsiniz.
+                                    Anlamadığınız matematik konuları için sadece o konuya özel uzaktan ders
+                                    alabilirsiniz.
+                                    Matematik testini çözerek alanında uzman hocalar tarafından size özel bir ders
+                                    programı hazırlanmasını sağlayabilirsiniz.
+                                </p>
+                            </div>
+
+                            <div class="w3-third w3-center">
+
+                                <img src="/design-files/images/index-math.jpg">
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Grid -->
+
+
+                    <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+                        <h1 class="w3-margin w3-xlarge">Hemen Öğrenmeye Başlayın</h1>
+                    </div>
+
+                    <!-- Footer -->
+                    <footer class="w3-container w3-padding-64 w3-center w3-opacity">
+                        <div class="w3-xlarge w3-padding-32">
+                            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+                            <i class="fa fa-instagram w3-hover-opacity"></i>
+                            <i class="fa fa-snapchat w3-hover-opacity"></i>
+                            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+                            <i class="fa fa-twitter w3-hover-opacity"></i>
+                            <i class="fa fa-linkedin w3-hover-opacity"></i>
+                        </div>
+                        <p>improved by <a href="https://github.com/OnurAkkose" target="_blank">Onur AKKÖSE</a></p>
+                    </footer>
+
+
+                </body>
+
+</html>
+
+</div>
+</div>
+
+</div>
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyCefXbhO6zMy9VAe2IOd0QVGrQYzYKKQow",
+        authDomain: "bisorusor-6ca2a.firebaseapp.com",
+        databaseURL: "https://bisorusor-6ca2a.firebaseio.com",
+        projectId: "bisorusor-6ca2a",
+        storageBucket: "bisorusor-6ca2a.appspot.com",
+        messagingSenderId: "416688477669",
+        appId: "1:416688477669:web:f0b78b38a552bc9e928b0c"
+    };
+
+
+
+    firebase.initializeApp(firebaseConfig)
+
+
+    firebase.auth.Auth.Persistence.LOCAL
+</script>
+
+<script>
+
+
+//var user = firebase.auth().currentUser;
+//var dbBlogs = firebase.database().ref().child("Users").orderByChild("uid").equalTo(user.uid);
+
+
+    /*var rootRef = firebase.database().ref().child("Users");
+    var userID = firebase.auth().currentUser;
+    var usersRef = rootRef.child(userID);
+    var userid = usersRef.firstName;*/
+        //var user = firebase.auth().currentUser;
+        //var uid = user.uid; 
+
+
+        //var name = user.firstName;
+
+       // 
+        //var userid=user.firstName;
+
+        //document.getElementById("username").innerHTML=name;
+
+</script>
+<script src="js/app.js"></script>
+<script>
+    function testUser() {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user == null) {
+                // window.location.href = "signin.html";
+                window.location.href = 'signin.html';
+            }
+            else {
+                switchView('myQuestions.html');
+
+            }
+
+
+        });
+    }
+
+    function testUserforHome() {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user == null) {
+                // window.location.href = "signin.html";
+                window.location.href = 'signin.html';
+            }
+            else {
+                switchView('home.html');
+
+            }
+
+
+        });
+    }
+    function testUserforSchedule() {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user == null) {
+                // window.location.href = "signin.html";
+                window.location.href = 'signin.html';
+            }
+            else {
+                switchView('schedule.html');
+
+            }
+
+
+        });
+    }
+    function testUserforMyQuestions() {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user == null) {
+                // window.location.href = "signin.html";
+                window.location.href = 'signin.html';
+            }
+            else {
+                switchView('myQuestions.html');
+
+            }
+
+
+        });
+    }
+    function testUserforProfileCon() {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user == null) {
+                // window.location.href = "signin.html";
+                window.location.href = 'signin.html';
+            }
+            else {
+                switchView('ProfileCon.html');
+
+            }
+
+
+        });
+    }
+    function testUserforMessageBox() {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user == null) {
+                // window.location.href = "signin.html";
+                window.location.href = 'signin.html';
+            }
+            else {
+                switchView('messageBox.html');
+
+            }
+
+
+        });
+    }
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user == null) {
+            // window.location.href = "signin.html";
+            document.getElementById("username").innerHTML = "Misafir";
+            //window.location.href="signin.html";
+        }
+        else {
+
+            document.getElementById("username").innerHTML = user.email;
+
+        }
+
+
+    });
+</script>
+</body>
+
+</html>
